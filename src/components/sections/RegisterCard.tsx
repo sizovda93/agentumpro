@@ -96,9 +96,6 @@ export default function RegisterCard() {
         )}
       </div>
 
-      <div className="flex justify-between items-end w-full mt-16">
-        <TensionLine items={["R", "G"]} />
-      </div>
     </article>
   );
 }

@@ -4,10 +4,6 @@ import TensionLine from "@/components/TensionLine";
 export default function FinanceCard() {
   return (
     <article className="card relative p-[3vw] max-md:p-[6vw] flex flex-col justify-between overflow-hidden bg-stone min-h-[50vh] max-lg:min-h-[40vh]">
-      {/* Верхняя декоративная линия */}
-      <div className="flex justify-between items-start w-full">
-        <TensionLine items={["F", "N"]} small style={{ width: "100%" }} />
-      </div>
 
       {/* Основной контент */}
       <div className="my-auto">

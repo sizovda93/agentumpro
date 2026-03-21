@@ -37,11 +37,6 @@ export default function StepsCard() {
           <span className="block">Процесс взаимодействия</span>
           <span className="block">Алгоритм работы партнёра</span>
         </div>
-        <TensionLine
-          items={["S", "T", "P"]}
-          small
-          style={{ width: "50%" }}
-        />
       </div>
 
       {/* Три шага */}

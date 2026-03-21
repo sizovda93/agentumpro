@@ -6,8 +6,7 @@ export default function HeroCard() {
     <article className="card relative p-[3vw] max-md:p-[6vw] flex flex-col justify-between overflow-hidden bg-paper min-h-[50vh] max-lg:min-h-[40vh]">
       {/* Верхняя строка: метка + навигация */}
       <div className="flex justify-between items-start w-full">
-        <TensionLine items={["P", "01"]} small style={{ width: "30%" }} />
-        <nav className="flex gap-8">
+<nav className="flex gap-8">
           <a href="#register" className="text-[0.85rem] text-ink">
             Регистрация агента
           </a>

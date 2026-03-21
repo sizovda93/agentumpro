@@ -15,9 +15,17 @@ export default function BrandCard() {
         </div>
       </div>
 
-      <div className="flex justify-between items-end w-full mt-16">
-        <TensionLine items={["A", "P"]} />
+      {/* Партнёры по центру */}
+      <div className="flex justify-center items-center gap-12 max-md:gap-6 w-full my-auto text-[0.85rem] tracking-tight text-ink/70 max-md:text-center">
+        <span className="whitespace-nowrap">СРО «Дело»</span>
+        <span className="flex flex-col items-center text-center"><span>АСПБ</span><span className="text-[0.6rem] leading-tight">Агентство сопровождения<br />процедур банкротства</span></span>
+        <span className="whitespace-nowrap">СРО «Гарантия»</span>
       </div>
+
+      <p className="text-[0.85rem] tracking-tight text-ink/50 text-center">
+        Сильное СРО Арбитражных управляющих — твои надёжные партнёры
+      </p>
+
     </article>
   );
 }
