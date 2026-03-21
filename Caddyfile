@@ -1,0 +1,31 @@
+# Замените на ваш домен, когда он будет готов.
+# Caddy автоматически получит Let's Encrypt сертификат.
+#
+# Для работы по IP (без HTTPS) используйте:
+#   :80 {
+#
+# Для домена:
+#   agentum-pro.ru {
+
+:80 {
+    # Проксируем всё в Next.js
+    reverse_proxy app:3000
+
+    # Сжатие
+    encode gzip
+
+    # Заголовки безопасности
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        X-XSS-Protection "1; mode=block"
+        -Server
+    }
+
+    # Логи
+    log {
+        output stdout
+        format console
+    }
+}

@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Базовые стили из исходного HTML */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, p, a, span, label, input {
+    font-weight: 400;
+  }
+
+  a {
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  a:hover {
+    opacity: 0.5;
+  }
+}
+
+/* Tension line — декоративная линия с буквами по краям */
+.tension-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.tension-line .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-ink, #1A1A1A);
+  margin: 0 1.5rem;
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tension-line.small {
+  font-size: 1rem;
+}
+
+.tension-line.small .line {
+  margin: 0 1rem;
+}
+
+/* Hover-эффект на карточках: линия чуть сжимается */
+.card:hover .tension-line .line {
+  transform: scaleX(0.98);
+}

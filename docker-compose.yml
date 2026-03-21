@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  # PostgreSQL
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agentum}
+      POSTGRES_USER: ${POSTGRES_USER:-agentum}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agentum}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Next.js приложение
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-agentum}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-agentum}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      NODE_ENV: production
+      UPLOAD_DIR: /data/uploads
+    volumes:
+      - uploads:/data/uploads
+      - backups:/data/backups
+    ports:
+      - "127.0.0.1:3000:3000"
+
+  # Caddy — reverse proxy с автоматическим HTTPS
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:       # Данные PostgreSQL
+  uploads:      # Загруженные файлы
+  backups:      # Резервные копии
+  caddy_data:   # Сертификаты Caddy
+  caddy_config: # Конфигурация Caddy

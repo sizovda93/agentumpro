@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+
+# production
+build/
+
+# env files (НИКОГДА не коммитить)
+.env
+.env.local
+.env.production
+
+# debug
+npm-debug.log*
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# uploads & backups (хранятся только на сервере)
+/uploads/
+/backups/
+
+# prisma
+prisma/*.db
+prisma/*.db-journal
