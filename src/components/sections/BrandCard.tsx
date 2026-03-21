@@ -6,13 +6,12 @@ export default function BrandCard() {
     <article className="card relative p-[3vw] max-md:p-[6vw] flex flex-col justify-between overflow-hidden bg-stone min-h-[50vh] max-lg:min-h-[40vh]">
       <div className="flex justify-between items-start w-full">
         <div className="text-[0.85rem] leading-tight tracking-tight">
-          <span className="block">Agentum Pro</span>
-          <span className="block">Legal Network</span>
-          <span className="block">Est. 2024</span>
+          <span className="block">Агентум Про</span>
+          <span className="block">Партнёрская сеть</span>
+          <span className="block">Осн. 2024</span>
         </div>
         <div className="text-[0.85rem] leading-tight tracking-tight text-right">
-          <span className="block">SYS.01.BKRT</span>
-          <span className="block">RU-MSK</span>
+          <span className="block">Россия — Москва</span>
         </div>
       </div>
 

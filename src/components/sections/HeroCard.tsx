@@ -8,9 +8,6 @@ export default function HeroCard() {
       <div className="flex justify-between items-start w-full">
         <TensionLine items={["P", "01"]} small style={{ width: "30%" }} />
         <nav className="flex gap-8">
-          <a href="/admin/login" className="text-[0.85rem] text-ink">
-            Вход
-          </a>
           <a href="#register" className="text-[0.85rem] text-ink">
             Регистрация агента
           </a>
