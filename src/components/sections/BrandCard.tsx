@@ -43,7 +43,7 @@ export default function BrandCard() {
           <span className="block">Осн. 2024</span>
         </div>
         <a
-          href="/register"
+          href="https://app.agentum.club"
           className="inline-block bg-ink text-white text-[0.85rem] leading-tight tracking-tight px-5 py-2.5 rounded-full hover:bg-ink/85 transition-colors"
         >
           Стать партнёром
