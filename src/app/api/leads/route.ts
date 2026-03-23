@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { z } from "zod";
 import { checkRateLimit } from "@/lib/rate-limit";
 
-// Валидация входящих данных
+const PLATFORM_API_URL = process.env.PLATFORM_API_URL;
+const PLATFORM_API_KEY = process.env.PLATFORM_API_KEY;
+
 const leadSchema = z.object({
   name: z.string().min(2, "Имя слишком короткое").max(100),
   phone: z
@@ -11,12 +12,10 @@ const leadSchema = z.object({
     .min(7, "Некорректный номер телефона")
     .max(20)
     .regex(/^[\d\s\+\-\(\)]+$/, "Некорректный формат телефона"),
-  message: z.string().max(1000).optional(),
 });
 
-// POST /api/leads — создание новой заявки с сайта
+// POST /api/leads — проксирует заявку в платформу
 export async function POST(request: NextRequest) {
-  // Rate limit: 5 заявок в минуту с одного IP
   const ip = request.headers.get("x-forwarded-for") || "unknown";
   const { allowed, retryAfterMs } = checkRateLimit(`lead:${ip}`, {
     maxRequests: 5,
@@ -37,18 +36,38 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const data = leadSchema.parse(body);
 
-    const lead = await db.lead.create({
-      data: {
-        name: data.name,
-        phone: data.phone,
-        message: data.message || null,
+    if (!PLATFORM_API_URL || !PLATFORM_API_KEY) {
+      console.error("Missing PLATFORM_API_URL or PLATFORM_API_KEY");
+      return NextResponse.json(
+        { error: "Сервис временно недоступен" },
+        { status: 503 }
+      );
+    }
+
+    const platformRes = await fetch(PLATFORM_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": PLATFORM_API_KEY,
       },
+      body: JSON.stringify({
+        firstName: data.name.split(" ")[0] || data.name,
+        lastName: data.name.split(" ").slice(1).join(" ") || "",
+        phone: data.phone,
+      }),
     });
 
-    return NextResponse.json(
-      { success: true, id: lead.id },
-      { status: 201 }
-    );
+    if (!platformRes.ok) {
+      const err = await platformRes.json().catch(() => ({}));
+      console.error("Platform API error:", platformRes.status, err);
+      return NextResponse.json(
+        { error: "Ошибка отправки заявки" },
+        { status: 502 }
+      );
+    }
+
+    const result = await platformRes.json();
+    return NextResponse.json({ success: true, id: result.id }, { status: 201 });
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json(
@@ -56,7 +75,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    console.error("Lead creation error:", err);
+    console.error("Lead proxy error:", err);
     return NextResponse.json(
       { error: "Внутренняя ошибка сервера" },
       { status: 500 }
