@@ -11,12 +11,12 @@ export default function BrandCard() {
     // 0 — центральный
     { x: cx, y: cy, label: "Партнёры", labelDy: -10, primary: true },
     // верхний ряд (широкая дуга)
-    { x: 28,  y: 24, label: "юристы",      labelDy: -7, primary: false },
-    { x: cx,  y: 18, label: "брокеры",     labelDy: -7, primary: false },
-    { x: 172, y: 24, label: "риелторы",    labelDy: -7, primary: false },
+    { x: 28,  y: 24, label: "Юристы",      labelDy: -7, primary: false },
+    { x: cx,  y: 18, label: "Брокеры",     labelDy: -7, primary: false },
+    { x: 172, y: 24, label: "Риелторы",    labelDy: -7, primary: false },
     // нижний ряд (чуть уже)
-    { x: 36,  y: 112, label: "бухгалтеры", labelDy: 9, primary: false },
-    { x: cx,  y: 118, label: "адвокаты",   labelDy: 9, primary: false },
+    { x: 36,  y: 112, label: "Бухгалтеры", labelDy: 9, primary: false },
+    { x: cx,  y: 118, label: "Адвокаты",   labelDy: 9, primary: false },
     { x: 164, y: 112, label: "HR",         labelDy: 9, primary: false },
   ];
 

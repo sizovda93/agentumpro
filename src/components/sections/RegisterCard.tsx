@@ -42,10 +42,18 @@ export default function RegisterCard() {
       id="register"
       className="card relative p-[3vw] max-md:p-[6vw] flex flex-col justify-between overflow-hidden bg-paper min-h-[50vh] max-lg:min-h-[40vh]"
     >
-      {/* Служебная метка */}
-      <div className="text-[0.85rem] leading-tight tracking-tight">
-        <span className="block">Регистрация</span>
-        <span className="block text-ink/40">Доступ к платформе по заявке</span>
+      {/* Служебная метка + кнопка входа */}
+      <div className="flex justify-between items-start w-full">
+        <div className="text-[0.85rem] leading-tight tracking-tight">
+          <span className="block">Регистрация</span>
+          <span className="block text-ink/40">Доступ к платформе по заявке</span>
+        </div>
+        <a
+          href="https://app.agentum.club"
+          className="inline-block text-[0.85rem] leading-tight tracking-tight px-5 py-2.5 rounded-full border border-ink/15 text-ink/60 hover:text-ink hover:border-ink/30 transition-colors"
+        >
+          Войти
+        </a>
       </div>
 
       {/* Заголовок + форма */}
