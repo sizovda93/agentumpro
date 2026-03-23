@@ -1,34 +1,36 @@
-import TensionLine from "@/components/TensionLine";
-
-// Карточка «Финансовая прозрачность»: условия выплат и статистика
+// Карточка «Финансовая прозрачность»: выплаты, отслеживание, контакты
 export default function FinanceCard() {
   return (
     <article className="card relative p-[3vw] max-md:p-[6vw] flex flex-col justify-between overflow-hidden bg-stone min-h-[50vh] max-lg:min-h-[40vh]">
-
-      {/* Основной контент */}
-      <div className="my-auto">
-        <h2 className="text-[2rem] mb-8 text-ink">
+      {/* Заголовок + подзаголовок */}
+      <div>
+        <h2 className="text-[2rem] leading-[1.1] tracking-tighter text-ink">
           Финансовая
           <br />
           прозрачность
         </h2>
-        <div className="text-[0.85rem] leading-tight tracking-tight mb-6">
-          <span className="block text-[#777] mb-2">Выплаты</span>
-          <span className="block">Еженедельные переводы</span>
-          <span className="block">СЗ / ИП / Физ. лица</span>
-        </div>
-        <div className="text-[0.85rem] leading-tight tracking-tight">
-          <span className="block text-[#777] mb-2">Статистика</span>
-          <span className="block">Личный кабинет агента</span>
-          <span className="block">Отслеживание статуса лидов 24/7</span>
-        </div>
+        <p className="text-[0.85rem] tracking-tight text-ink/45 mt-3 max-w-[30ch]">
+          Прозрачные условия выплат и&nbsp;контроль статуса каждой сделки.
+        </p>
       </div>
 
-      {/* Контакты */}
-      <div className="flex justify-between items-end w-full">
+      {/* Три модуля */}
+      <div className="flex flex-col gap-6">
         <div className="text-[0.85rem] leading-tight tracking-tight">
-          <span className="block">info@agentum-pro.ru</span>
-          <span className="block">+7 495 000 00 00</span>
+          <span className="block text-ink/35 mb-1.5">Выплаты</span>
+          <span className="block text-ink">Еженедельные переводы</span>
+        </div>
+
+        <div className="text-[0.85rem] leading-tight tracking-tight">
+          <span className="block text-ink/35 mb-1.5">Отслеживание</span>
+          <span className="block text-ink">Личный кабинет партнёра</span>
+          <span className="block text-ink">Статусы лидов и договоров 24/7</span>
+        </div>
+
+        <div className="text-[0.85rem] leading-tight tracking-tight">
+          <span className="block text-ink/35 mb-1.5">Контакты</span>
+          <span className="block text-ink">info@agentum-pro.ru</span>
+          <span className="block text-ink">+7 495 000 00 00</span>
         </div>
       </div>
     </article>
