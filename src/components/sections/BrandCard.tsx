@@ -37,6 +37,10 @@ export default function BrandCard() {
           <span className="whitespace-nowrap">СРО «Гарантия»</span>
         </div>
       </div>
+
+      <p className="text-[0.8rem] tracking-tight text-ink/30">
+        Сильное СРО — твои надёжные партнёры!
+      </p>
     </article>
   );
 }
